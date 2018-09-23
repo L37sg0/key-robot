@@ -1,3 +1,5 @@
+## You can find the executable file in dist/key-robot.exe ##
+
 from pynput.keyboard import Key, Controller
 from time import sleep
 from tkinter import *
@@ -37,16 +39,26 @@ class robo:
         self.mainframe.columnconfigure(1, weight=1)
         #self.mainframe.rowconfigure(1, weight=1)
 
+        # The image frame
+        
+        ## The image frame is removed because of problem with the executable file.
+        
+        #self.frameImage = ttk.LabelFrame(self.mainframe, text="Робо- Съпорт", padding="5 5 5 5")
+        #self.frameImage.grid(row=0, column=0, sticky=(E, W, N, S))
+        #self.frameImage.columnconfigure(0, weight=1)
+        #self.frameImage.rowconfigure(0, weight=1)
+        
         # The instructions frame
         self.frameInstructions = ttk.LabelFrame(self.mainframe, text="Инструкции:", padding="5 5 5 5")
         self.frameInstructions.grid(row=0, column=0, sticky=(E, W, N, S))
-        self.frameInstructions.columnconfigure(0, weight=1)
-        self.frameInstructions.rowconfigure(0, weight=1)
+        #self.frameInstructions.columnconfigure(0, weight=1)
+        #self.frameInstructions.rowconfigure(0, weight=1)
 
-        robot = ttk.Label(self.frameInstructions, text=self.text, image=None)
-        robot.grid(row=0, column=0, padx=5, sticky=(E, W, S, N))
-        #self.instruction = Text(self.frameInstructions, bd=2)
-        #self.instruction.grid(row=0, column=0, sticky=(E, W, S, N))
+        #self.robot = ttk.Label(self.frameImage, text=self.text, image=None)
+        #self.robot.grid(row=0, column=0, padx=5, sticky=(E, W, S, N))
+        
+        self.robot2 = ttk.Label(self.frameInstructions, text=self.text, image=None)
+        self.robot2.grid(row=0, column=0, padx=5, sticky=(E, W, S, N))
 
         # The settings frame
         self.framesettings = ttk.LabelFrame(self.mainframe, text="Настройка:", padding="5 5 5 5")
@@ -92,21 +104,22 @@ class robo:
         self.startButton.grid(row=3, column=0, sticky=(E, W))
         self.stopButton = ttk.Button(self.framesettings, text="Stop", command=self.stop, padding="5 5 5 5")
         self.stopButton.grid(row=4, column=0, sticky=(E, W))
+        
+        #roboImage = self.create_img_object("robot.jpg")
+        #self.set_img(roboImage)
 
     ## Logic: ##
     
     def start(self):
         if(self.cancel_id==None):
             self.iterator = 0
-            #self.condition = True
             self.support()
 
     def support(self):
-        if(self.iterator<int(self.allTime.get())/int(self.betweenTime.get())):
-        #for i in range(int(self.allTime/self.betweenTime)):
+        if(self.iterator<int(self.allTime.get())/int(self.betweenTime.get())*60):
             if(self.command.get()!=""):
-                #self.keyboard.type(self.command.get())
-                print(self.command.get())
+                self.keyboard.type(self.command.get())
+                #print(self.command.get())
             else:
                 pass
 
@@ -132,22 +145,18 @@ class robo:
             self.cancel_id = None
 
 
-#def create_img_object(self, arg):
-#    self.arg = arg
-#    self.photo = PIL.Image.open(self.arg)
-#    self.photo.resize((120,200),PIL.Image.ANTIALIAS)
-#    self.photo = PIL.ImageTk.PhotoImage(self.photo)
-#    return photo
+    #def create_img_object(self, arg):
+        #self.arg = arg
+        #self.photo = PIL.Image.open(self.arg)
+        #self.photo = self.photo.resize((150,200), PIL.Image.ANTIALIAS)
+        #self.photo = PIL.ImageTk.PhotoImage(self.photo)
+        #return self.photo
 
 
-#def set_img(self, arg):
-#    self.arg = arg
-#    robot.configure(image=self.arg)
-    #self._img_name.set(self.arg)
-
-#roboImage = create_img_object("robot.jpg")
-#set_img(roboImage)
-
+    #def set_img(self, arg):
+        #self.arg = arg
+        #self.robot.configure(image=self.arg)
+        #self._img_name.set(self.arg)
 
         
 #Graphical interface
@@ -164,6 +173,3 @@ def main():
 
 if __name__ == '__main__':
     main() 
-
-#sleep(waitTime)
-#support(command, keyOne, keyTwo, allTime, betweenTime)
